@@ -1,0 +1,71 @@
+<div style="margin-left:1%; margin-top:5px;">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-2">
+          <label>Name</label>
+        </div>
+        <div class="col-xs-2">
+          <label>Phase</label>
+        </div>
+        <div class="col-xs-2">
+          <label>Activity</label>
+        </div>
+        <div class="col-xs-2">
+          <label>Task</label>
+        </div>
+        <div class="col-xs-1">
+          <label>Billable</label>
+        </div>
+        <div class="col-xs-2">
+          <label>Hours</label>
+        </div>
+        <div class="col-xs-1">
+          <label>Delete</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <form [formGroup]="addTimeSheetForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-xs-12" formArrayName="projects">
+            <div class="row" *ngFor="let project of getControls(); let i =index;" [formGroupName]="i" style="margin-top:10px;">
+              <div class="col-xs-2">
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+              <div class="col-xs-2">
+                <select #ph type="text" (change)="onPhaseChange(ph.value, i)" class="form-control" formControlName="phase">
+                    <option *ngFor="let phase of phases" [value]="phase">{{phase}}</option>
+                </select>
+              </div>
+              <div class="col-xs-2">
+                <select class="form-control" formControlName="activity">
+                  <option *ngFor="let activity of activities" [value]="activity">{{activity}}</option>
+                </select>
+              </div>
+              <div class="col-xs-2">
+                <input type="text" class="form-control" formControlName="task">
+              </div>
+              <div class="col-xs-1">
+                <input type="checkbox" class="" formControlName="billable">
+              </div>
+              <div class="col-xs-2">
+                <input type="number" class="form-control" formControlName="hours">
+              </div>
+              <div class="col-xs-1">
+                <button class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+              </div>
+            </div>
+            <hr>
+            <div class="col-xs-12">
+              <button class="btn btn-primary" type="button" (click)="onAddRecord()">Add a row</button>
+              <button class="btn btn-success" type="submit">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
